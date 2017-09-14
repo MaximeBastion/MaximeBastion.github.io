@@ -1,5 +1,5 @@
 .nav-link {
-    font-size: 25px;   /* dépend du nb d'onglets dans la navbar -> bug pas en demi-écran */
+    font-size: 25px;     /* dépend du nb d'onglets dans la navbar -> bug pas en demi-écran */
     text-indent: 30px;
 }
 
@@ -27,7 +27,6 @@ body {
 
 }
 .carousel-indicators .active {
-
     background-color: #0000ff;
     height: 10px;
 }
@@ -44,9 +43,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: inherit;
-    font-weight: 700;
-    line-height: 1.75em;
+
     margin-bottom: 1em;
 }
 
