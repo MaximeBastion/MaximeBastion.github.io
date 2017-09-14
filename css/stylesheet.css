@@ -1,0 +1,55 @@
+.nav-link {
+    font-size: 25px;   /* dépend du nb d'onglets dans la navbar -> bug pas en demi-écran */
+    text-indent: 30px;
+}
+
+body {
+    background-color: #E8EAF6;
+
+}
+
+#navbar {
+    background-color: #3F51B5;
+}
+
+
+/* Carousel */
+.carousel-control-prev {
+    background-color: lightgrey;
+}
+.carousel-control-next {
+    background-color: lightgrey;
+}
+.carousel-indicators li {
+
+    background-color: gray;
+    height: 10px;
+
+}
+.carousel-indicators .active {
+
+    background-color: #0000ff;
+    height: 10px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+}
+
+
+.centeredImg {
+    display: block;
+    margin: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: inherit;
+    font-weight: 700;
+    line-height: 1.75em;
+    margin-bottom: 1em;
+}
+
+h1 {
+    text-align: center;
+}
