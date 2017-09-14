@@ -50,3 +50,22 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     text-align: center;
 }
+
+h2 {
+    margin-left: 1%;
+}
+
+p {
+    margin-left: 9%;
+    margin-right: 9%;
+    font-size: 15pt;
+    font-weight: 300;
+    line-height: 1.75em;
+
+}
+
+#voletsRoulantCard {
+    display: block;
+    width: 32%;
+    margin: auto;
+}
