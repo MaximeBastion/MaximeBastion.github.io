@@ -5,11 +5,12 @@
 
 body {
     background-color: #E8EAF6;
+    padding-top: 96px;
 
 }
 
 #navbar {
-    background-color: #3F51B5;
+    background-color: #304FFE;
 }
 
 
@@ -42,6 +43,8 @@ body {
     margin: auto;
 }
 
+
+
 h1, h2, h3, h4, h5, h6 {
 
     margin-bottom: 1em;
@@ -49,15 +52,15 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     text-align: center;
+    font-size: 3.3vw;
 }
 
-h2 {
+h2, h3, h4 {
     margin-left: 1%;
 }
 
-h4 {
-    text-align: center;
-}
+
+
 
 p {
     margin-left: 9%;
@@ -65,12 +68,63 @@ p {
     font-size: 15pt;
     font-weight: 300;
     line-height: 1.75em;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 
+}
+
+.below820 {
+    margin-left: 2.6vw;
+    margin-right: 2.6vw;
+}
+.para820 {
+    margin-left: 2.6vw;
+    margin-right: 2.6vw;
+    margin-top: 2.6vh;
+    margin-bottom: 2.6vh;
+}
+
+.jumbotron {
+
+    background-color: #304FFE;
+    color: #ffffff;
+    margin: 0;
+}
+
+.lead {  /* sub jumbotron text*/
+    opacity: 0.7;
+}
+
+.breadcrumb {
+    border-radius: 0;
+    background-color: #304FFE;
+    margin: 0;
+}
+.breadcrumb-item {
+    color: white;
 }
 
 #voletsRoulantCard {
     display: block;
     width: 32%;
     margin: auto;
+}
+
+.container-fluid {
+    margin: 0;
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+    background-color: #E8EAF6;
+}
+
+.bg-grey {
+    background-color: #C5CAE9; /* 197,202,233 */
+}
+.bg-light {
+    background-color: #E8EAF6;
+}
+
+.align-left {
+    margin-left: 0;
 }
 
