@@ -13,7 +13,6 @@
   animation-fill-mode: both;
   visibility: hidden;
 }
-
 .animated.infinite {
   animation-iteration-count: infinite;
 }
