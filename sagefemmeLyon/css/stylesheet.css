@@ -4,11 +4,12 @@
 }
 
 body {
-    background-color: #FFECB3;
+    background-color: #eee;
     font-family: "Alegreya", serif;
     font-style: normal;
-
 }
+
+
 
 .navbar-custom {
     background-color: #FFC107;
@@ -190,8 +191,8 @@ h1 {
     font-size: 40px;
     font-style: normal;
     font-weight: 400;
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
 }
 
 h4 {
@@ -269,7 +270,7 @@ p {
 }
 
 .breadcrumb {
-    background-color: #FFECB3;
+
 }
 .breadcrumb-item {
 
@@ -282,9 +283,13 @@ p {
 }
 
 .container-fluid {
-
     padding-top: 2vw;
     padding-bottom: 2vw;
+    background-color: #999999;
+}
+.contentCol {
+    background-color: #eee;
+    padding: 100px;
 }
 
 
