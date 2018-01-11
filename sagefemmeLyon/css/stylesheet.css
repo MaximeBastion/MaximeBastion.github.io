@@ -485,7 +485,7 @@ p {
     text-align: center;
 }
 .centeredText {
-    text-align: center;
+    text-align: center !important;
     margin-bottom: 0px;
 }
 
