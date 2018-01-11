@@ -1,6 +1,6 @@
 .nav-link {
     font-size: 1.45em;     /* dépend du nb d'onglets dans la navbar -> bug pas en demi-écran */
-    text-indent: 0.5em;
+    text-indent: 0em;
 }
 
 body {
@@ -25,16 +25,23 @@ footer {
 .navbar div div ul li a { /* All navbar links */
     opacity: 0.8;
     font-size: 1.5em;
+    color: black !important;
 }
 
 .activeLink  {
     background-color: #ffd54f;
     opacity: 1 !important;
+
 }
 
 .nav-link:hover {
     opacity: 1;
 
+}
+
+.navbarContainer {
+    padding: 0;
+    margin: auto;
 }
 
 
@@ -514,5 +521,5 @@ p {
 
 .dropdown:hover .dropdown-menu {
     display: block;
-    margin-top: 0; // remove the gap so it doesn't close
+    margin-top: 0;
 }
