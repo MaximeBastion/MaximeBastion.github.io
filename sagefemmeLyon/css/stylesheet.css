@@ -202,7 +202,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 45px;
     font-style: normal;
     font-weight: 400;
     margin-top: 1.5em;
@@ -227,7 +227,7 @@ p {
 
     font-size: 17pt;
     font-weight: 300;
-    line-height: 1.75em;
+    line-height: 1.85em;
     margin-top: 2vh;
     margin-bottom: 2vh;
 }
