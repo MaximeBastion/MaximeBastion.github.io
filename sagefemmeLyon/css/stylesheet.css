@@ -226,7 +226,7 @@ h2 {
 
 p {
 
-    font-size: 17pt;
+    font-size: 18pt;
     font-weight: 300;
     line-height: 1.85em;
     margin-top: 2vh;
@@ -401,6 +401,10 @@ p {
 }
 .lighten {
     filter: brightness(145%);
+}
+
+.bold{
+    font-weight: bold;
 }
 
 
