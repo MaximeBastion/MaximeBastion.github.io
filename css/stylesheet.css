@@ -294,8 +294,6 @@ p {
     .hiddenForIpad {
         visibility: hidden;
     }
-
-
 }
 
 .triolet {
@@ -317,4 +315,16 @@ footer {
 .lineAfter {
     padding-bottom: 4em;
     border-bottom: 1px solid black;
+}
+
+.textLeftPadding{
+    padding-left: 24%;
+}
+
+.textLeftPaddingMin{
+    padding-left: 10%;
+}
+
+.centeredText {
+    text-align: center;
 }

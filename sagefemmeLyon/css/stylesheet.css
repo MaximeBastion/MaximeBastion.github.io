@@ -498,7 +498,7 @@ p {
 }
 .centeredText {
     text-align: center !important;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .lineAfter {
