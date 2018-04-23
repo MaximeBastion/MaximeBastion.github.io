@@ -26,15 +26,6 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="js/modernizr.custom.js"></script>
 
-    <!-- Unity Web Build -->
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-    <script src="TemplateData/UnityProgress.js"></script>
-    <script src="Build/UnityLoader.js"></script>
-    <script>
-        var gameInstance = UnityLoader.instantiate("gameContainer", "Build/HoMMWithCardsWebBuild2.json", {onProgress: UnityProgress});
-    </script>
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -74,13 +65,18 @@
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden"> <a href="#page-top"></a> </li>
                     <li> <a class="page-scroll" href="index.html">Home</a> </li>
+                    <li> <a class="page-scroll" href="#overview">Overview</a> </li>
+                    <li> <a class="page-scroll" href="#devInf">UML graph</a> </li>
+                    <li> <a class="page-scroll" href="#tryGame">Try the game online</a> </li>
+                    <li> <a class="page-scroll" href="#portfolio">Portfolio</a> </li>
+                    <li> <a class="page-scroll" href="#contact">Contact</a> </li>
                 </ul>
             </div>
         </div>
     </nav>
 </div>
 <!-- Content Section -->
-<div class="container">
+<div class="container" id="overview">
     <br><br><br>
     <div class="section-title text-center center">
         <h2>HoMM Card Game - Project Overview</h2>
@@ -103,13 +99,14 @@
             <h3>Goal</h3>
             <br>
             <p>The goal of each player is to destroy the opponent’s Altar located on the opposite side of the board.</p>
-            <p>He can do so by hitting it with units he summoned and with the help of spells.</p>
-            <p>He must prevent his opponent from doing it as well.</p>
+            <p>He can do so by hitting it with units he summons and by casting spells.</p>
+            <p>He must prevent his opponent from destroying his altar as well.</p>
         </div>
         <div class="row projectSection">
             <h3>Mana</h3>
             <br>
             <p>In order to play cards, a player needs mana. Players start with 0 mana, and they gain each turn a number of mana equal to the current turn’s number.</p>
+            <p>Unused mana is conserved.</p>
         </div>
         <div class="row projectSection">
             <h3>Cards</h3>
@@ -119,7 +116,7 @@
             <ul>
                 <li>
                     <p><b>- Unit cards:</b></p>
-                    <p>When played, unit cards allow the player to summon a unit on a cell of is choice (the chosen cell can only be on the first row for the first player, and on the last for the second player).</p>
+                    <p>When played, unit cards allow the player to summon a unit on a cell of is choice (only on the first row for the first player, and on the last for the second player).</p>
                     <p>On the card, we can read in order the <b>movement range, attack range, mana cost, attack damage and health</b>.</p>
                 </li>
                 <li>
@@ -152,7 +149,8 @@
                 </li>
                 <li>
                     <p><b>- Attacking</b></p>
-                    <p>The unit can attack a target unit or enemy altar if the target belongs to an opponent and if it’s distance to it is inferior or equal to its attack range value. It then deals damage to it equal to his damage value.</p>
+                    <p>The unit can attack a target unit or enemy altar if the target belongs to an opponent and if it’s distance to it is inferior or equal to its attack range value. </p>
+                    <p>It then deals damage to it equal to his damage value.</p>
                     <p>If its health goes to 0 or less, the unit is removed from the battlefield, or in case of an altar, the active player wins the game.</p>
                 </li>
             </ul>
@@ -163,12 +161,12 @@
             <br>
             <p>The zones system is highly inspired by Magic: The Gathering.</p>
             <br>
-            <p>A card is always in a zone, and there are three zones:</p>
+            <p>A card is always in a zone, and there are three zones for each player:</p>
             <div class="about-text">
             <ul>
                 <li>
                     <p><b>- The Library:</b></p>
-                    <p>When the game begins, every zone is empty, except for the libraries, which contains the deck of each player (the pile of 40 cards they play with this match</p>
+                    <p>When the game begins, every zone is empty, except for the libraries, which contain the deck of each player (the pile of 40 cards they play with this match).</p>
                     <p>Players draw a card from their library at the beginning of each of their turn.</p>
                 </li>
                 <li>
@@ -177,12 +175,12 @@
                 </li>
                 <li>
                     <p><b>- The Graveyard</b></p>
-                    <p>When a spell card is played or unit dies, it goes into the graveyard of its owner.</p>
+                    <p>When a spell card is played or a unit dies, it goes into its owner's graveyard.</p>
                 </li>
             </ul>
             </div>
         </div>
-        <div class="container">
+        <div class="container" id="devInf">
             <br><br><br>
             <div class="section-title text-center center">
                 <h2>Development Informations</h2>
@@ -190,7 +188,7 @@
             </div>
         </div>
         <div class="row projectSection">
-            <h3>UML Chart of the main classes</h3>
+            <h3>UML graph of the main classes</h3>
         </div>
     </div>
 </div>
@@ -206,15 +204,23 @@
         <p>Each zone contains cards, which are either unit cards or spell cards.</p>
         <p>Spell cards can either have a single target or affect every unit of one/both player(s).</p>
     </div>
-    <div class="row projectSection">
-        <h3>Want to try the game online ?</h3>
-        <br>
-        <div class="webgl-content">
-            <div id="gameContainer" style="width: 960px; height: 600px"></div>
-            <div class="footer">
-                <div class="webgl-logo"></div>
-                <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
-                <div class="title">HoMMWithCards</div>
+</div>
+<div class="container" id="tryGame">
+    <br><br><br>
+    <div class="section-title text-center center">
+        <a href="playHoMMCard.html" target="_blank"><h2 class="orangeText">Try the game online with this link</h2></a>
+        <hr>
+        <div class="container" id="keysContainer">
+            <div class="row">
+                <p>You can move the camera by using</p><img src="img/portfolio/HoMMCardGame/z.png"><img src="img/portfolio/HoMMCardGame/q.png"><img src="img/portfolio/HoMMCardGame/s.png"><img src="img/portfolio/HoMMCardGame/d.png">
+                <br>
+            </div>
+            <div class="row">
+                <p>You can end the current turn by pressing the end turn button or by pressing</p><img src="img/portfolio/HoMMCardGame/t.png">
+                <br>
+            </div>
+            <div class="row">
+                <p>It is recommended to play on fullscreen mode as the UI is not responsive.</p>
             </div>
         </div>
     </div>

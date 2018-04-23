@@ -636,3 +636,12 @@ header .intro-text {
 .bgGrey  {
 	background-color: #fff;
 }
+
+.orangeText {
+	color : darkorange;
+}
+
+#tryGame{
+	padding-top: 5%;
+	padding-bottom: 5%;
+}
