@@ -644,3 +644,8 @@ header .intro-text {
 	padding-top: 5%;
 	padding-bottom: 5%;
 }
+
+.padded{
+	padding-top: 2%;
+	padding-bottom: 2%;
+}
