@@ -14,7 +14,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="408">
@@ -26,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hoMMCardGame.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="hoMMCardGame.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hoMMCardGame.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="181" column="43" lean-forward="true" selection-start-line="181" selection-start-column="43" selection-end-line="181" selection-end-column="43" />
+            <state relative-caret-position="424">
+              <caret line="108" column="77" lean-forward="false" selection-start-line="108" selection-start-column="77" selection-end-line="108" selection-end-column="77" />
               <folding>
                 <element signature="n#div#7;n#body#0;n#html#0;n#!!top" expanded="false" />
               </folding>
@@ -58,8 +58,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/hoMMCardGame.html" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/hoMMCardGame.html" />
       </list>
     </option>
   </component>
@@ -141,12 +141,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1524569568409</updated>
-      <workItem from="1524569572955" duration="3866000" />
+      <workItem from="1524569572955" duration="4666000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3866000" />
+    <option name="totallyTimeSpent" value="4666000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -189,22 +189,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hoMMCardGame.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="181" column="43" lean-forward="true" selection-start-line="181" selection-start-column="43" selection-end-line="181" selection-end-column="43" />
-          <folding>
-            <element signature="n#div#7;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="87" column="89" lean-forward="false" selection-start-line="87" selection-start-column="89" selection-end-line="87" selection-end-column="89" />
           <folding>
             <element signature="n#div#3;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hoMMCardGame.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="108" column="77" lean-forward="false" selection-start-line="108" selection-start-column="77" selection-end-line="108" selection-end-column="77" />
+          <folding>
+            <element signature="n#div#7;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
