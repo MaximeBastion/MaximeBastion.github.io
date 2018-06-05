@@ -17,27 +17,27 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="161" selection-end-column="14" />
+            <state relative-caret-position="-120">
+              <caret line="7" column="45" lean-forward="false" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cuboid.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="cuboid.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cuboid.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="553">
-              <caret line="202" column="22" lean-forward="false" selection-start-line="202" selection-start-column="22" selection-end-line="202" selection-end-column="22" />
+            <state relative-caret-position="603">
+              <caret line="108" column="89" lean-forward="false" selection-start-line="108" selection-start-column="89" selection-end-line="108" selection-end-column="89" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hoMMCardGame.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hoMMCardGame.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hoMMCardGame.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="664">
+            <state relative-caret-position="6384">
               <caret line="266" column="22" lean-forward="false" selection-start-line="266" selection-start-column="22" selection-end-line="266" selection-end-column="22" />
               <folding />
             </state>
@@ -71,9 +71,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/hoMMCardGame.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/cuboid.html" />
-        <option value="$PROJECT_DIR$/hoMMCardGame.html" />
       </list>
     </option>
   </component>
@@ -160,12 +160,12 @@
       <workItem from="1524649713550" duration="762000" />
       <workItem from="1525280445707" duration="58000" />
       <workItem from="1525871759807" duration="897000" />
-      <workItem from="1528194636566" duration="11326000" />
+      <workItem from="1528194636566" duration="12036000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18309000" />
+    <option name="totallyTimeSpent" value="19019000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
@@ -306,24 +306,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="161" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cuboid.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="202" column="22" lean-forward="false" selection-start-line="202" selection-start-column="22" selection-end-line="202" selection-end-column="22" />
+        <state relative-caret-position="-120">
+          <caret line="7" column="45" lean-forward="false" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hoMMCardGame.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="664">
+        <state relative-caret-position="6384">
           <caret line="266" column="22" lean-forward="false" selection-start-line="266" selection-start-column="22" selection-end-line="266" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cuboid.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="603">
+          <caret line="108" column="89" lean-forward="false" selection-start-line="108" selection-start-column="89" selection-end-line="108" selection-end-column="89" />
           <folding />
         </state>
       </provider>
