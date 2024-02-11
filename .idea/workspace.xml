@@ -217,15 +217,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.cardsClicker.js">
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <envs />
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
@@ -250,6 +242,14 @@
       <option name="filePath" />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+    </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
       <command value="run-script" />
       <scripts />
@@ -272,16 +272,6 @@
     </configuration>
     <configuration name="cardsClicker.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="cardsClicker.js" working-dir="$USER_HOME$/Desktop/Safe/WebstormProjects/Clicker" />
     <configuration name="moneyBack.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="moneyBack.js" working-dir="$USER_HOME$/Desktop/Safe/WebstormProjects/Clicker" />
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Node.js.moneyBack.js" />
-      <item index="1" class="java.lang.String" itemvalue="Node.js.cardsClicker.js" />
-    </list>
-    <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Node.js.cardsClicker.js" />
-        <item index="1" class="java.lang.String" itemvalue="Node.js.moneyBack.js" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
