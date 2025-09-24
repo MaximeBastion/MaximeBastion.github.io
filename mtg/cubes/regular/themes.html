@@ -70,13 +70,17 @@
       border-radius: 12px;
       box-shadow: 0 8px 24px rgba(0,0,0,.6);
       display: none;
+      background: #0b0d10;
+      border: 1px solid rgba(255,255,255,.15);
+      padding: 6px;
     }
     .preview-popup img {
       display: block;
-      width: 300px;
-      max-width: 90vw;
       height: auto;
-      border-radius: 12px;
+      width: auto;
+      max-width: min(420px, 46vw);
+      max-height: 70vh;
+      border-radius: 8px;
     }
 
     /* Footer */
@@ -183,19 +187,49 @@
     return wrap;
   }
 
-  async function fetchCardImage(cardName) {
+  async function fetchCardUris(cardName) {
     try {
       const url = `https://api.scryfall.com/cards/named?exact=${encodeURIComponent(cardName)}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error('not ok');
       const data = await res.json();
-      const uri = (data.image_uris && (data.image_uris.normal || data.image_uris.large || data.image_uris.png))
-               || (data.card_faces && data.card_faces[0]?.image_uris?.normal)
-               || null;
-      return uri;
+      const normal = (data.image_uris && (data.image_uris.normal || data.image_uris.large || data.image_uris.png))
+                  || (data.card_faces && data.card_faces[0]?.image_uris?.normal)
+                  || null;
+      const large  = (data.image_uris && (data.image_uris.large || data.image_uris.png || data.image_uris.normal))
+                  || (data.card_faces && data.card_faces[0]?.image_uris?.large)
+                  || normal;
+      return { thumb: normal, preview: large };
     } catch (e) {
-      return null;
+      return { thumb: null, preview: null };
     }
+  }
+
+  function positionPreview(e) {
+    const pad = 16;
+    const margin = 8;
+    // Use viewport-relative coords for position:fixed
+    let left = e.clientX + pad;
+    let top  = e.clientY + pad;
+
+    // Temporarily show to measure size accurately
+    previewPopup.style.display = 'block';
+    const rect = previewPopup.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    if (left + rect.width + margin > vw) {
+      left = e.clientX - rect.width - pad;
+    }
+    if (left < margin) left = Math.max(margin, vw - rect.width - margin);
+
+    if (top + rect.height + margin > vh) {
+      top = e.clientY - rect.height - pad;
+    }
+    if (top < margin) top = Math.max(margin, vh - rect.height - margin);
+
+    previewPopup.style.left = left + 'px';
+    previewPopup.style.top  = top + 'px';
   }
 
   async function makeTile(item) {
@@ -223,22 +257,24 @@
     const samples = el('div', 'samples');
     const names = (item.samples || []).slice(0,3);
     await Promise.all(names.map(async (name) => {
-      const uri = await fetchCardImage(name);
-      if (uri) {
+      const uris = await fetchCardUris(name);
+      if (uris.thumb) {
         const img = document.createElement('img');
-        img.src = uri;
+        img.src = uris.thumb;
         img.alt = name;
         img.loading = 'lazy';
         img.decoding = 'async';
         img.className = 'cardimg';
         img.title = name;
-        img.addEventListener('mouseenter', () => {
-          previewImg.src = uri;
+        img.addEventListener('mouseenter', (e) => {
+          previewImg.src = uris.preview || uris.thumb;
+          positionPreview(e);
           previewPopup.style.display = 'block';
         });
+        let rafId = null;
         img.addEventListener('mousemove', (e) => {
-          previewPopup.style.left = (e.pageX + 20) + 'px';
-          previewPopup.style.top = (e.pageY + 20) + 'px';
+          if (rafId) return;
+          rafId = requestAnimationFrame(() => { positionPreview(e); rafId = null; });
         });
         img.addEventListener('mouseleave', () => {
           previewPopup.style.display = 'none';
@@ -280,10 +316,10 @@
       return;
     }
 
-    await Promise.all(items.map(async (it) => {
+    for (const it of items) {
       const tile = await makeTile(it);
       grid.appendChild(tile);
-    }));
+    }
   }
 
   chips.forEach(ch => ch.addEventListener('click', () => {
