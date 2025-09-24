@@ -117,25 +117,25 @@
     {
       name: "Azorius Blink",
       description: "ETB creatures + flicker effects for repeatable value.",
-      colors: { primary: ["W","U"], splash: ["B"] },
+      colors: { primary: ["W","U"], secondary: ["B"] },
       samples: ["Ephemerate", "Mulldrifter", "Soulherder"]
     },
     {
       name: "Rakdos Sacrifice",
       description: "Sac outlets + fodder + payoffs; grindy attrition and reach.",
-      colors: { primary: ["R","B"], splash: [] },
+      colors: { primary: ["R","B"], secondary: [] },
       samples: ["Mayhem Devil", "Claim the Firstborn", "Blood Artist"]
     },
     {
       name: "Selesnya Counters",
       description: "+1/+1 counters snowball with anthem effects and combat tricks.",
-      colors: { primary: ["G","W"], splash: [] },
+      colors: { primary: ["G","W"], secondary: [] },
       samples: ["Conclave Mentor", "Luminarch Aspirant", "The Ozolith"]
     },
     {
       name: "Dimir Reanimator-Control",
       description: "Discard/bins + reanimate; blue control shell to protect the plan.",
-      colors: { primary: ["U","B"], splash: [] },
+      colors: { primary: ["U","B"], secondary: [] },
       samples: ["Reanimate", "Persist", "Atraxa, Grand Unifier"]
     }
   ];
@@ -157,7 +157,7 @@
     const img = new Image();
     img.src = manaIconUrl(letter);
     img.alt = ({W:'White',U:'Blue',B:'Black',R:'Red',G:'Green'}[letter]||letter);
-    wrap.title = img.alt + (small ? ' (splash)' : ' (primary)');
+    wrap.title = img.alt + (small ? ' (secondary)' : ' (primary)');
     wrap.appendChild(img);
     return wrap;
   }
@@ -189,9 +189,9 @@
 
     const mana = el('div', 'mana');
     const prim = (item.colors?.primary || []).slice();
-    const splash = (item.colors?.splash || []).slice();
+    const secondary = (item.colors?.secondary || []).slice();
     prim.forEach(c => mana.appendChild(createManaPip(c, false)));
-    splash.forEach(c => mana.appendChild(createManaPip(c, true)));
+    secondary.forEach(c => mana.appendChild(createManaPip(c, true)));
 
     left.appendChild(title);
     left.appendChild(desc);
@@ -224,7 +224,7 @@
   }
 
   function includesAllColors(itemColors, activeColors) {
-    const set = new Set([...(itemColors.primary||[]), ...(itemColors.splash||[])]);
+    const set = new Set([...(itemColors.primary||[]), ...(itemColors.secondary||[])]);
     return activeColors.every(c => set.has(c));
   }
 
