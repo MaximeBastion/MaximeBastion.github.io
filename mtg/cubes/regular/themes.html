@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Regular cube themes</title>
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --panel: #141821;
+      --ink: #e8ecf0;
+      --muted: #9aa7b2;
+      --accent: #7cc4ff;
+      --card-gap: 1rem;
+      --radius: 16px;
+      --shadow: 0 6px 20px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #0b0d10, #0d121a 60%, #0b0f17);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.35;
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(8px);
+      background: rgba(11,13,16,.65);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 1rem 1.2rem; }
+
+    h1 { font-size: clamp(1.4rem, 2.8vw, 2rem); margin: 0 0 .25rem; letter-spacing: .2px; }
+    .sub { color: var(--muted); font-size: .95rem; }
+
+    /* Controls */
+    .controls { margin-top: .75rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+    .chip { border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: .3rem .55rem; cursor: pointer; user-select: none; font-size: .9rem; color: var(--muted); background: rgba(255,255,255,.03); display: inline-flex; align-items: center; gap: .4rem; }
+    .chip[aria-pressed="true"] { color: var(--ink); border-color: var(--accent); box-shadow: 0 0 0 2px rgba(124,196,255,.18) inset; }
+    .chip img { width: 18px; height: 18px; display: block; }
+
+    /* Grid */
+    .grid { display: grid; gap: var(--card-gap); grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); padding: 1.1rem; }
+
+    .tile { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)); border: 1px solid rgba(255,255,255,.10); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+    .tile-head { padding: 1rem 1rem .75rem; display: grid; grid-template-columns: 1fr auto; gap: .75rem; align-items: start; }
+    .title { font-weight: 700; font-size: 1.05rem; }
+    .desc { color: var(--muted); margin-top: .35rem; font-size: .92rem; }
+
+    /* Mana pips */
+    .mana { display: flex; gap: .35rem; align-items: center; }
+    .pip { display: grid; place-items: center; border-radius: 999px; background: rgba(255,255,255,.06); padding: .25rem; border: 1px solid rgba(255,255,255,.12); }
+    .pip img { width: 24px; height: 24px; }
+    .pip.small img { width: 16px; height: 16px; opacity: .9; }
+
+    /* Samples */
+    .samples { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; padding: .75rem 1rem 1rem; }
+    .cardimg { aspect-ratio: 5/7; width: 100%; border-radius: 10px; object-fit: cover; background: #111; border: 1px solid rgba(255,255,255,.1); }
+    .placeholder { display: grid; place-items: center; color: var(--muted); font-size: .8rem; padding: .5rem; text-align: center; }
+
+    /* Footer */
+    footer { color: var(--muted); font-size: .85rem; padding: 1rem 1.2rem 2rem; text-align: center; }
+
+    /* --- One-page compact variables --- */
+    body.compact { font-size: 13px; }
+    body.compact .wrap { max-width: 1000px; padding: .6rem .8rem; }
+    body.compact .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .6rem; padding: .6rem; }
+    body.compact .tile { border-radius: 12px; }
+    body.compact .tile-head { padding: .6rem .6rem .4rem; gap: .5rem; }
+    body.compact .title { font-size: .98rem; }
+    body.compact .desc { font-size: .88rem; }
+    body.compact .pip img { width: 18px; height: 18px; }
+    body.compact .pip.small img { width: 14px; height: 14px; }
+    body.compact .samples { grid-template-columns: repeat(2, 1fr); gap: .35rem; padding: .5rem .6rem .6rem; }
+    @media print { body.compact .samples img:nth-child(n+2) { display: none !important; } }
+
+    @media print {
+      html, body { background: #0b0d10 !important; color: var(--ink) !important; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      header { position: static; backdrop-filter: none; background: rgba(11,13,16,.85) !important; border-bottom: 1px solid rgba(255,255,255,.15); }
+      .controls { display: none !important; }
+      .tile { break-inside: avoid; border-color: rgba(255,255,255,.18); box-shadow: none; }
+      .grid { padding: .4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Regular cube themes</h1>
+      <div class="controls">
+        <div class="filters" id="colorFilters" aria-label="Color filters">
+          <button class="chip" data-color="W" aria-pressed="false"><img alt="White" src="https://svgs.scryfall.io/card-symbols/W.svg">W</button>
+          <button class="chip" data-color="U" aria-pressed="false"><img alt="Blue" src="https://svgs.scryfall.io/card-symbols/U.svg">U</button>
+          <button class="chip" data-color="B" aria-pressed="false"><img alt="Black" src="https://svgs.scryfall.io/card-symbols/B.svg">B</button>
+          <button class="chip" data-color="R" aria-pressed="false"><img alt="Red" src="https://svgs.scryfall.io/card-symbols/R.svg">R</button>
+          <button class="chip" data-color="G" aria-pressed="false"><img alt="Green" src="https://svgs.scryfall.io/card-symbols/G.svg">G</button>
+          <button id="compactToggle" class="chip" aria-pressed="false" title="Fit all archetypes on a single printed page">📄 Fit one page</button>
+          <button id="printBtn" class="chip" title="Print this cheat sheet">🖨️ Print</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="grid" class="grid" aria-live="polite"></section>
+  </main>
+
+  <style id="dynamicPrint" media="print"></style>
+
+  <script>
+  const archetypes = [
+    {
+      name: "Azorius Blink",
+      description: "ETB creatures + flicker effects for repeatable value.",
+      colors: { primary: ["W","U"], splash: ["B"] },
+      samples: ["Ephemerate", "Mulldrifter", "Soulherder"]
+    },
+    {
+      name: "Rakdos Sacrifice",
+      description: "Sac outlets + fodder + payoffs; grindy attrition and reach.",
+      colors: { primary: ["R","B"], splash: [] },
+      samples: ["Mayhem Devil", "Claim the Firstborn", "Blood Artist"]
+    },
+    {
+      name: "Selesnya Counters",
+      description: "+1/+1 counters snowball with anthem effects and combat tricks.",
+      colors: { primary: ["G","W"], splash: [] },
+      samples: ["Conclave Mentor", "Luminarch Aspirant", "The Ozolith"]
+    },
+    {
+      name: "Dimir Reanimator-Control",
+      description: "Discard/bins + reanimate; blue control shell to protect the plan.",
+      colors: { primary: ["U","B"], splash: [] },
+      samples: ["Reanimate", "Persist", "Atraxa, Grand Unifier"]
+    }
+  ];
+
+  const grid = document.getElementById('grid');
+  const chips = Array.from(document.querySelectorAll('.chip[data-color]'));
+  const compactToggle = document.getElementById('compactToggle');
+  const printBtn = document.getElementById('printBtn');
+  const dynPrint = document.getElementById('dynamicPrint');
+
+  function el(tag, cls, txt) { const e = document.createElement(tag); if (cls) e.className = cls; if (txt) e.textContent = txt; return e; }
+
+  function manaIconUrl(letter) {
+    return `https://svgs.scryfall.io/card-symbols/${letter}.svg`;
+  }
+
+  function createManaPip(letter, small=false) {
+    const wrap = el('div', small ? 'pip small' : 'pip');
+    const img = new Image();
+    img.src = manaIconUrl(letter);
+    img.alt = ({W:'White',U:'Blue',B:'Black',R:'Red',G:'Green'}[letter]||letter);
+    wrap.title = img.alt + (small ? ' (splash)' : ' (primary)');
+    wrap.appendChild(img);
+    return wrap;
+  }
+
+  async function fetchCardImage(cardName) {
+    try {
+      const url = `https://api.scryfall.com/cards/named?exact=${encodeURIComponent(cardName)}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('not ok');
+      const data = await res.json();
+      const uri = (data.image_uris && (data.image_uris.normal || data.image_uris.large || data.image_uris.png))
+               || (data.card_faces && data.card_faces[0]?.image_uris?.normal)
+               || null;
+      return uri;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function makeTile(item) {
+    const card = el('article', 'tile');
+
+    const head = el('div', 'tile-head');
+    const left = el('div');
+    const right = el('div');
+
+    const title = el('div', 'title', item.name);
+    const desc = el('div', 'desc', item.description);
+
+    const mana = el('div', 'mana');
+    const prim = (item.colors?.primary || []).slice();
+    const splash = (item.colors?.splash || []).slice();
+    prim.forEach(c => mana.appendChild(createManaPip(c, false)));
+    splash.forEach(c => mana.appendChild(createManaPip(c, true)));
+
+    left.appendChild(title);
+    left.appendChild(desc);
+    right.appendChild(mana);
+    head.appendChild(left);
+    head.appendChild(right);
+
+    const samples = el('div', 'samples');
+    const names = (item.samples || []).slice(0,3);
+    await Promise.all(names.map(async (name) => {
+      const uri = await fetchCardImage(name);
+      if (uri) {
+        const img = document.createElement('img');
+        img.src = uri;
+        img.alt = name;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.className = 'cardimg';
+        img.title = name;
+        samples.appendChild(img);
+      } else {
+        const ph = el('div', 'cardimg placeholder', name);
+        samples.appendChild(ph);
+      }
+    }));
+
+    card.appendChild(head);
+    card.appendChild(samples);
+    return card;
+  }
+
+  function includesAllColors(itemColors, activeColors) {
+    const set = new Set([...(itemColors.primary||[]), ...(itemColors.splash||[])]);
+    return activeColors.every(c => set.has(c));
+  }
+
+  async function render() {
+    grid.innerHTML = '';
+    const active = chips.filter(ch => ch.getAttribute('aria-pressed') === 'true').map(ch => ch.dataset.color);
+
+    const items = archetypes
+      .filter(a => !active.length || includesAllColors(a.colors||{}, active))
+      .slice()
+      .sort((a,b) => {
+        const pa = (a.colors?.primary||[]).length;
+        const pb = (b.colors?.primary||[]).length;
+        return pb-pa || a.name.localeCompare(b.name);
+      });
+
+    if (!items.length) {
+      const empty = el('div', 'desc', 'No archetypes match your filters.');
+      grid.appendChild(empty);
+      return;
+    }
+
+    await Promise.all(items.map(async (it) => {
+      const tile = await makeTile(it);
+      grid.appendChild(tile);
+    }));
+  }
+
+  chips.forEach(ch => ch.addEventListener('click', () => {
+    const pressed = ch.getAttribute('aria-pressed') === 'true';
+    ch.setAttribute('aria-pressed', String(!pressed));
+    render();
+  }));
+
+  function setCompact(on) {
+    document.body.classList.toggle('compact', on);
+    compactToggle?.setAttribute('aria-pressed', String(on));
+    if (on) {
+      dynPrint.textContent = `@page { size: A4 landscape; margin: 8mm; }`;
+    } else {
+      dynPrint.textContent = '';
+    }
+  }
+
+  compactToggle?.addEventListener('click', () => {
+    const on = compactToggle.getAttribute('aria-pressed') !== 'true';
+    setCompact(on);
+  });
+
+  printBtn?.addEventListener('click', () => {
+    window.print();
+  });
+
+  render();
+  </script>
+</body>
+</html>
