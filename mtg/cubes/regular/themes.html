@@ -349,6 +349,12 @@
         img.decoding = 'async';
         img.className = 'cardimg';
         img.title = name;
+        img.addEventListener('mouseenter', (e) => {
+          previewImg.src = uris.preview || uris.thumb;
+          positionPreview(e);
+          previewPopup.style.display = 'block';
+        });
+        let rafId = null;
         img.addEventListener('mousemove', (e) => {
           if (rafId) return;
           rafId = requestAnimationFrame(() => { positionPreview(e); rafId = null; });
