@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Regular cube themes</title>
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --panel: #141821;
+      --ink: #e8ecf0;
+      --muted: #9aa7b2;
+      --accent: #7cc4ff;
+      --card-gap: 1rem;
+      --radius: 16px;
+      --shadow: 0 6px 20px rgba(0,0,0,.35);
+      --common-bg: rgba(46, 139, 87, 0.15);
+      --common-border: #2e8b57;
+      --uncommon-bg: rgba(184, 134, 11, 0.12);
+      --uncommon-border: #b8860b;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #0b0d10, #0d121a 60%, #0b0f17);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.35;
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(8px);
+      background: rgba(11,13,16,.65);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 1rem 1.2rem; }
+
+    h1 { font-size: clamp(1.4rem, 2.8vw, 2rem); margin: 0 0 .25rem; letter-spacing: .2px; }
+    .sub { color: var(--muted); font-size: .95rem; }
+
+    /* Controls */
+    .controls { margin-top: .75rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+    .chip { border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: .3rem .55rem; cursor: pointer; user-select: none; font-size: .9rem; color: var(--muted); background: rgba(255,255,255,.03); display: inline-flex; align-items: center; gap: .4rem; }
+    .chip[aria-pressed="true"] { color: var(--ink); border-color: var(--accent); box-shadow: 0 0 0 2px rgba(124,196,255,.18) inset; }
+    .chip img { width: 18px; height: 18px; display: block; }
+
+    /* Grid */
+    .grid { display: grid; gap: var(--card-gap); grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); padding: 1.1rem; }
+
+    .tile { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)); border: 1px solid rgba(255,255,255,.10); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+    .tile.common { background: var(--common-bg); border-color: var(--common-border); }
+    .tile.uncommon { background: var(--uncommon-bg); border-color: var(--uncommon-border); }
+
+    .tile-head { padding: 1rem 1rem .75rem; display: grid; grid-template-columns: 1fr auto; gap: .75rem; align-items: start; }
+    .title { font-weight: 700; font-size: 1.05rem; }
+    .desc { color: var(--muted); margin-top: .35rem; font-size: .92rem; }
+
+    /* Mana pips */
+    .mana { display: flex; gap: .35rem; align-items: center; }
+    .pip { display: grid; place-items: center; border-radius: 999px; background: rgba(255,255,255,.06); padding: .25rem; border: 1px solid rgba(255,255,255,.12); }
+    .pip img { width: 24px; height: 24px; }
+    .pip.small img { width: 16px; height: 16px; opacity: .9; }
+
+    /* Samples */
+    .samples { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; padding: .75rem 1rem 1rem; }
+    .cardimg { aspect-ratio: 5/7; width: 100%; border-radius: 10px; object-fit: cover; background: #111; border: 1px solid rgba(255,255,255,.1); cursor: pointer; }
+    .placeholder { display: grid; place-items: center; color: var(--muted); font-size: .8rem; padding: .5rem; text-align: center; }
+
+    /* Card hover preview */
+    .preview-popup {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1000;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.6);
+      display: none;
+      background: #0b0d10;
+      border: 1px solid rgba(255,255,255,.15);
+      padding: 6px;
+    }
+    .preview-popup img {
+      display: block;
+      height: auto;
+      width: auto;
+      max-width: min(420px, 46vw);
+      max-height: 70vh;
+      border-radius: 8px;
+    }
+
+    /* Footer */
+    footer { color: var(--muted); font-size: .85rem; padding: 1rem 1.2rem 2rem; text-align: center; }
+
+    /* --- One-page compact variables --- */
+    body.compact { font-size: 13px; }
+    body.compact .wrap { max-width: 1000px; padding: .6rem .8rem; }
+    body.compact .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .6rem; padding: .6rem; }
+    body.compact .tile { border-radius: 12px; }
+    body.compact .tile-head { padding: .6rem .6rem .4rem; gap: .5rem; }
+    body.compact .title { font-size: .98rem; }
+    body.compact .desc { font-size: .88rem; }
+    body.compact .pip img { width: 18px; height: 18px; }
+    body.compact .pip.small img { width: 14px; height: 14px; }
+    body.compact .samples { grid-template-columns: repeat(2, 1fr); gap: .35rem; padding: .5rem .6rem .6rem; }
+    @media print { body.compact .samples img:nth-child(n+2) { display: none !important; } }
+
+    @media print {
+      html, body { background: #0b0d10 !important; color: var(--ink) !important; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      header { position: static; backdrop-filter: none; background: rgba(11,13,16,.85) !important; border-bottom: 1px solid rgba(255,255,255,.15); }
+      .controls { display: none !important; }
+      .tile { break-inside: avoid; border-color: rgba(255,255,255,.18); box-shadow: none; }
+      .grid { padding: .4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Regular cube themes</h1>
+      <div class="controls">
+        <div class="filters" id="colorFilters" aria-label="Color filters">
+          <button class="chip" data-color="W" aria-pressed="false"><img alt="White" src="https://svgs.scryfall.io/card-symbols/W.svg">W</button>
+          <button class="chip" data-color="U" aria-pressed="false"><img alt="Blue" src="https://svgs.scryfall.io/card-symbols/U.svg">U</button>
+          <button class="chip" data-color="B" aria-pressed="false"><img alt="Black" src="https://svgs.scryfall.io/card-symbols/B.svg">B</button>
+          <button class="chip" data-color="R" aria-pressed="false"><img alt="Red" src="https://svgs.scryfall.io/card-symbols/R.svg">R</button>
+          <button class="chip" data-color="G" aria-pressed="false"><img alt="Green" src="https://svgs.scryfall.io/card-symbols/G.svg">G</button>
+          <button id="compactToggle" class="chip" aria-pressed="false" title="Fit all themes on a single printed page">📄 Fit one page</button>
+          <button id="printBtn" class="chip" title="Print this cheat sheet">🖨️ Print</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="grid" class="grid" aria-live="polite"></section>
+  </main>
+
+  <div class="preview-popup" id="previewPopup"><img alt="preview"></div>
+
+  <footer>
+    <div style="margin-bottom:0.8rem;">
+      <strong>Legend:</strong>
+      <span style="display:inline-block;padding:0.2rem 0.5rem;border-radius:6px;background:var(--common-bg);border:1px solid var(--common-border);margin:0 0.4rem;">Common</span>
+      <span style="display:inline-block;padding:0.2rem 0.5rem;border-radius:6px;background:var(--uncommon-bg);border:1px solid var(--uncommon-border);margin:0 0.4rem;">Uncommon</span>
+    </div>
+  </footer>
+
+  <style id="dynamicPrint" media="print"></style>
+
+  <script>
+  const themes = [
+    {
+      name: "Draw-go control",
+      description: "Take control of the game with counterspells and removal mostly played on opponents' turns.",
+      colors: { primary: ["U"], secondary: ["W"]  },
+      samples: ["Wrangler of the Damned", "By Invitation Only", "Refute"],
+      prevalence: "uncommon"
+    },
+    {
+      name: "Zombies",
+      description: "Swarm your opponent with a horde of the undead, using graveyard recursion to keep them coming.",
+      colors: { primary: ["B"], secondary: ["R"] },
+      samples: ["Champion of the Perished", "Cemetery Reaper", "Dreadhorde Butcher"],
+      prevalence: "common"
+    },
+    {
+      name: "Sacrifice",
+      description: "Sacrifice your own creatures for value and to trigger effects.",
+      colors: { primary: ["B"], secondary: ["R", "W", "G"] },
+      samples: ["Nested Shambler", "Cruel Celebrant", "Carrion Feeder"],
+      prevalence: "common"
+    },
+    {
+      name: "Heroic aggro",
+      description: "Target your creatures with spells and sometimes abilities to get extra value and push through damage.",
+      colors: { primary: ["W","R"], secondary: ["G"] },
+      samples: ["Fabled Hero", "Seedglaive Mentor", "Borrowed Hostility"],
+      prevalence: "common"
+    },
+    {
+      name: "+1/+1 counters",
+      description: "Give and spread +1/+1 counters on your creatures to overwhelm your opponent.",
+      colors: { primary: ["W","G"], secondary: [] },
+      samples: ["Grateful Apparition", "Pollenbright Druid", "Gird for Battle"],
+      prevalence: "uncommon"
+    },
+    {
+      name: "Curiosity tempo",
+      description: "Maintain pressure with cheap evasive creatures backed by protection and buffs.",
+      colors: { primary: ["U", "G"], secondary: [] },
+      samples: ["Ivy, Gleeful Spellthief", "Curious Obsession", "Snakeskin Veil"],
+      prevalence: "uncommon"
+    },
+    {
+      name: "Squirrels and food",
+      description: "Generate value with food tokens and squirrel synergies.",
+      colors: { primary: ["G"], secondary: ["B"] },
+      samples: ["Squirrel Sovereign", "Drey Keeper", "Honored Dreyleader"],
+      prevalence: "common"
+    },
+    {
+      name: "Artifacts control",
+      description: "Control and generate value with artifacts and artifact synergies.",
+      colors: { primary: ["C", "U", "B"], secondary: [] },
+      samples: ["Baleful Strix", "Sphinx Summoner", "Bolas's Citadel"],
+      prevalence: "common"
+    },
+    {
+      name: "Artifacts aggro",
+      description: "Aggressive artifact creatures backed by artifact synergies.",
+      colors: { primary: ["C", "B"], secondary: ["U"] },
+      samples: ["Steel Overseer", "Syndicate Trafficker", "Scrap Trawler"],
+      prevalence: "uncommon"
+    },
+    {
+      name: "Mass reanimation",
+      description: "Reanimate multiple small creatures at once for value or as a combo finisher",
+      colors: { primary: ["W", "B"], secondary: [] },
+      samples: ["Return to the Ranks", "Blood Artist", "Carrion Feeder"],
+      prevalence: "uncommon"
+    },
+    {
+      name: "Spellslinger",
+      description: "Cast lots of instant and sorcery spells to generate value and pressure",
+      colors: { primary: ["U", "R"], secondary: [] },
+      samples: ["Young Pyromancer", "Sprite Dragon", "Lava Dart"],
+      prevalence: "common"
+    },
+    {
+      name: "Go-wide tokens",
+      description: "Generate a wide board of tokens and overwhelm your opponent",
+      colors: { primary: ["W", "G"], secondary: [] },
+      samples: ["Anthem of Champions", "Resolute Reinforcements", "Saproling Migration"],
+      prevalence: "uncommon"
+    },
+    {
+      name: "Ferocious stompy",
+      description: "Stomp with power 4+ creature synergies",
+      colors: { primary: ["G"], secondary: ["R"] },
+      samples: ["Goreclaw, Terror of Qal Sisma", "Garruk's Uprising", "Tyrox, Saurid Tyrant"],
+      prevalence: "common"
+    }
+  ];
+
+  const grid = document.getElementById('grid');
+  const chips = Array.from(document.querySelectorAll('.chip[data-color]'));
+  const compactToggle = document.getElementById('compactToggle');
+  const printBtn = document.getElementById('printBtn');
+  const dynPrint = document.getElementById('dynamicPrint');
+  const previewPopup = document.getElementById('previewPopup');
+  const previewImg = previewPopup.querySelector('img');
+
+  function el(tag, cls, txt) { const e = document.createElement(tag); if (cls) e.className = cls; if (txt) e.textContent = txt; return e; }
+
+  function manaIconUrl(letter) {
+    return `https://svgs.scryfall.io/card-symbols/${letter}.svg`;
+  }
+
+  function createManaPip(letter, small=false) {
+    const wrap = el('div', small ? 'pip small' : 'pip');
+    const img = new Image();
+    img.src = manaIconUrl(letter);
+    img.alt = ({W:'White',U:'Blue',B:'Black',R:'Red',G:'Green'}[letter]||letter);
+    wrap.title = img.alt + (small ? ' (secondary)' : ' (primary)');
+    wrap.appendChild(img);
+    return wrap;
+  }
+
+  async function fetchCardUris(cardName) {
+    try {
+      const url = `https://api.scryfall.com/cards/named?exact=${encodeURIComponent(cardName)}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('not ok');
+      const data = await res.json();
+      const normal = (data.image_uris && (data.image_uris.normal || data.image_uris.large || data.image_uris.png))
+                  || (data.card_faces && data.card_faces[0]?.image_uris?.normal)
+                  || null;
+      const large  = (data.image_uris && (data.image_uris.large || data.image_uris.png || data.image_uris.normal))
+                  || (data.card_faces && data.card_faces[0]?.image_uris?.large)
+                  || normal;
+      return { thumb: normal, preview: large };
+    } catch (e) {
+      return { thumb: null, preview: null };
+    }
+  }
+
+  function positionPreview(e) {
+    const pad = 16;
+    const margin = 8;
+    // Use viewport-relative coords for position:fixed
+    let left = e.clientX + pad;
+    let top  = e.clientY + pad;
+
+    // Temporarily show to measure size accurately
+    previewPopup.style.display = 'block';
+    const rect = previewPopup.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    if (left + rect.width + margin > vw) {
+      left = e.clientX - rect.width - pad;
+    }
+    if (left < margin) left = Math.max(margin, vw - rect.width - margin);
+
+    if (top + rect.height + margin > vh) {
+      top = e.clientY - rect.height - pad;
+    }
+    if (top < margin) top = Math.max(margin, vh - rect.height - margin);
+
+    previewPopup.style.left = left + 'px';
+    previewPopup.style.top  = top + 'px';
+  }
+
+  async function makeTile(item) {
+    const card = el('article', 'tile');
+    if (item.prevalence) card.classList.add(item.prevalence);
+
+    const head = el('div', 'tile-head');
+    const left = el('div');
+    const right = el('div');
+
+    const title = el('div', 'title', item.name);
+    const desc = el('div', 'desc', item.description);
+
+    const mana = el('div', 'mana');
+    const prim = (item.colors?.primary || []).slice();
+    const secondary = (item.colors?.secondary || []).slice();
+    prim.forEach(c => mana.appendChild(createManaPip(c, false)));
+    secondary.forEach(c => mana.appendChild(createManaPip(c, true)));
+
+    left.appendChild(title);
+    left.appendChild(desc);
+    right.appendChild(mana);
+    head.appendChild(left);
+    head.appendChild(right);
+
+    const samples = el('div', 'samples');
+    const names = (item.samples || []).slice(0,3);
+    await Promise.all(names.map(async (name) => {
+      const uris = await fetchCardUris(name);
+      if (uris.thumb) {
+        const img = document.createElement('img');
+        img.src = uris.thumb;
+        img.alt = name;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.className = 'cardimg';
+        img.title = name;
+        img.addEventListener('mousemove', (e) => {
+          if (rafId) return;
+          rafId = requestAnimationFrame(() => { positionPreview(e); rafId = null; });
+        });
+        img.addEventListener('mouseleave', () => {
+          previewPopup.style.display = 'none';
+          previewImg.src = '';
+        });
+        samples.appendChild(img);
+      } else {
+        const ph = el('div', 'cardimg placeholder', name);
+        samples.appendChild(ph);
+      }
+    }));
+
+    card.appendChild(head);
+    card.appendChild(samples);
+    return card;
+  }
+
+  function includesAllColors(itemColors, activeColors) {
+    const set = new Set([...(itemColors.primary||[]), ...(itemColors.secondary||[])]);
+    return activeColors.every(c => set.has(c));
+  }
+
+  async function render() {
+    grid.innerHTML = '';
+    const active = chips.filter(ch => ch.getAttribute('aria-pressed') === 'true').map(ch => ch.dataset.color);
+
+    const items = themes
+      .filter(a => !active.length || includesAllColors(a.colors||{}, active))
+      .slice()
+      .sort((a,b) => {
+        const pa = (a.colors?.primary||[]).length;
+        const pb = (b.colors?.primary||[]).length;
+        return pb-pa || a.name.localeCompare(b.name);
+      });
+
+    if (!items.length) {
+      const empty = el('div', 'desc', 'No themes match your filters.');
+      grid.appendChild(empty);
+      return;
+    }
+
+    for (const it of items) {
+      const tile = await makeTile(it);
+      grid.appendChild(tile);
+    }
+  }
+
+  chips.forEach(ch => ch.addEventListener('click', () => {
+    const pressed = ch.getAttribute('aria-pressed') === 'true';
+    ch.setAttribute('aria-pressed', String(!pressed));
+    render();
+  }));
+
+  function setCompact(on) {
+    document.body.classList.toggle('compact', on);
+    compactToggle?.setAttribute('aria-pressed', String(on));
+    if (on) {
+      dynPrint.textContent = `@page { size: A4 landscape; margin: 8mm; }`;
+    } else {
+      dynPrint.textContent = '';
+    }
+  }
+
+  compactToggle?.addEventListener('click', () => {
+    const on = compactToggle.getAttribute('aria-pressed') !== 'true';
+    setCompact(on);
+  });
+
+  printBtn?.addEventListener('click', () => {
+    window.print();
+  });
+
+  window.addEventListener('scroll', () => { previewPopup.style.display = 'none'; }, { passive: true });
+
+  // Initial render
+  render();
+  </script>
+</body>
+</html>
