@@ -14,6 +14,10 @@
       --card-gap: 1rem;
       --radius: 16px;
       --shadow: 0 6px 20px rgba(0,0,0,.35);
+      --common-bg: rgba(46, 139, 87, 0.15);
+      --common-border: #2e8b57;
+      --uncommon-bg: rgba(184, 134, 11, 0.12);
+      --uncommon-border: #b8860b;
     }
 
     * { box-sizing: border-box; }
@@ -47,6 +51,9 @@
     .grid { display: grid; gap: var(--card-gap); grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); padding: 1.1rem; }
 
     .tile { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)); border: 1px solid rgba(255,255,255,.10); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+    .tile.common { background: var(--common-bg); border-color: var(--common-border); }
+    .tile.uncommon { background: var(--uncommon-bg); border-color: var(--uncommon-border); }
+
     .tile-head { padding: 1rem 1rem .75rem; display: grid; grid-template-columns: 1fr auto; gap: .75rem; align-items: start; }
     .title { font-weight: 700; font-size: 1.05rem; }
     .desc { color: var(--muted); margin-top: .35rem; font-size: .92rem; }
@@ -120,7 +127,7 @@
           <button class="chip" data-color="B" aria-pressed="false"><img alt="Black" src="https://svgs.scryfall.io/card-symbols/B.svg">B</button>
           <button class="chip" data-color="R" aria-pressed="false"><img alt="Red" src="https://svgs.scryfall.io/card-symbols/R.svg">R</button>
           <button class="chip" data-color="G" aria-pressed="false"><img alt="Green" src="https://svgs.scryfall.io/card-symbols/G.svg">G</button>
-          <button id="compactToggle" class="chip" aria-pressed="false" title="Fit all archetypes on a single printed page">📄 Fit one page</button>
+          <button id="compactToggle" class="chip" aria-pressed="false" title="Fit all themes on a single printed page">📄 Fit one page</button>
           <button id="printBtn" class="chip" title="Print this cheat sheet">🖨️ Print</button>
         </div>
       </div>
@@ -133,87 +140,108 @@
 
   <div class="preview-popup" id="previewPopup"><img alt="preview"></div>
 
+  <footer>
+    <div style="margin-bottom:0.8rem;">
+      <strong>Legend:</strong>
+      <span style="display:inline-block;padding:0.2rem 0.5rem;border-radius:6px;background:var(--common-bg);border:1px solid var(--common-border);margin:0 0.4rem;">Common</span>
+      <span style="display:inline-block;padding:0.2rem 0.5rem;border-radius:6px;background:var(--uncommon-bg);border:1px solid var(--uncommon-border);margin:0 0.4rem;">Uncommon</span>
+    </div>
+  </footer>
+
   <style id="dynamicPrint" media="print"></style>
 
   <script>
-  const archetypes = [
+  const themes = [
     {
       name: "Draw-go control",
       description: "Take control of the game with counterspells and removal mostly played on opponents' turns.",
       colors: { primary: ["U"], secondary: ["W"]  },
-      samples: ["Wrangler of the Damned", "By Invitation Only", "Refute"]
+      samples: ["Wrangler of the Damned", "By Invitation Only", "Refute"],
+      prevalence: "uncommon"
     },
     {
       name: "Zombies",
       description: "Swarm your opponent with a horde of the undead, using graveyard recursion to keep them coming.",
       colors: { primary: ["B"], secondary: ["R"] },
-      samples: ["Champion of the Perished", "Cemetery Reaper", "Dreadhorde Butcher"]
+      samples: ["Champion of the Perished", "Cemetery Reaper", "Dreadhorde Butcher"],
+      prevalence: "common"
     },
     {
       name: "Sacrifice",
       description: "Sacrifice your own creatures for value and to trigger effects.",
       colors: { primary: ["B"], secondary: ["R", "W", "G"] },
-      samples: ["Nested Shambler", "Cruel Celebrant", "Carrion Feeder"]
+      samples: ["Nested Shambler", "Cruel Celebrant", "Carrion Feeder"],
+      prevalence: "common"
     },
     {
       name: "Heroic aggro",
       description: "Target your creatures with spells and sometimes abilities to get extra value and push through damage.",
       colors: { primary: ["W","R"], secondary: ["G"] },
-      samples: ["Fabled Hero", "Seedglaive Mentor", "Borrowed Hostility"]
+      samples: ["Fabled Hero", "Seedglaive Mentor", "Borrowed Hostility"],
+      prevalence: "common"
     },
     {
       name: "+1/+1 counters",
       description: "Give and spread +1/+1 counters on your creatures to overwhelm your opponent.",
       colors: { primary: ["W","G"], secondary: [] },
-      samples: ["Grateful Apparition", "Pollenbright Druid", "Gird for Battle"]
+      samples: ["Grateful Apparition", "Pollenbright Druid", "Gird for Battle"],
+      prevalence: "uncommon"
     },
     {
       name: "Curiosity tempo",
       description: "Maintain pressure with cheap evasive creatures backed by protection and buffs.",
       colors: { primary: ["U", "G"], secondary: [] },
-      samples: ["Ivy, Gleeful Spellthief", "Curious Obsession", "Snakeskin Veil"]
+      samples: ["Ivy, Gleeful Spellthief", "Curious Obsession", "Snakeskin Veil"],
+      prevalence: "uncommon"
     },
     {
       name: "Squirrels and food",
       description: "Generate value with food tokens and squirrel synergies.",
       colors: { primary: ["G"], secondary: ["B"] },
-      samples: ["Squirrel Sovereign", "Drey Keeper", "Honored Dreyleader"]
+      samples: ["Squirrel Sovereign", "Drey Keeper", "Honored Dreyleader"],
+      prevalence: "common"
     },
     {
       name: "Artifacts control",
       description: "Control and generate value with artifacts and artifact synergies.",
       colors: { primary: ["C", "U", "B"], secondary: [] },
-      samples: ["Baleful Strix", "Sphinx Summoner", "Bolas's Citadel"]
+      samples: ["Baleful Strix", "Sphinx Summoner", "Bolas's Citadel"],
+      prevalence: "common"
     },
     {
       name: "Artifacts aggro",
       description: "Aggressive artifact creatures backed by artifact synergies.",
       colors: { primary: ["C", "B"], secondary: ["U"] },
-      samples: ["Steel Overseer", "Syndicate Trafficker", "Scrap Trawler"]
+      samples: ["Steel Overseer", "Syndicate Trafficker", "Scrap Trawler"],
+      prevalence: "uncommon"
     },
     {
       name: "Mass reanimation",
       description: "Reanimate multiple small creatures at once for value or as a combo finisher",
       colors: { primary: ["W", "B"], secondary: [] },
-      samples: ["Return to the Ranks", "Blood Artist", "Carrion Feeder"]
+      samples: ["Return to the Ranks", "Blood Artist", "Carrion Feeder"],
+      prevalence: "uncommon"
     },
     {
       name: "Spellslinger",
       description: "Cast lots of instant and sorcery spells to generate value and pressure",
       colors: { primary: ["U", "R"], secondary: [] },
-      samples: ["Young Pyromancer", "Sprite Dragon", "Lava Dart"]
+      samples: ["Young Pyromancer", "Sprite Dragon", "Lava Dart"],
+      prevalence: "common"
     },
     {
       name: "Go-wide tokens",
       description: "Generate a wide board of tokens and overwhelm your opponent",
       colors: { primary: ["W", "G"], secondary: [] },
-      samples: ["Anthem of Champions", "Resolute Reinforcements", "Saproling Migration"]
+      samples: ["Anthem of Champions", "Resolute Reinforcements", "Saproling Migration"],
+      prevalence: "uncommon"
     },
     {
       name: "Ferocious stompy",
       description: "Stomp with power 4+ creature synergies",
       colors: { primary: ["G"], secondary: ["R"] },
-      samples: ["Goreclaw, Terror of Qal Sisma", "Garruk's Uprising", "Tyrox, Saurid Tyrant"]
+      samples: ["Goreclaw, Terror of Qal Sisma", "Garruk's Uprising", "Tyrox, Saurid Tyrant"],
+      prevalence: "common"
     }
   ];
 
@@ -288,6 +316,7 @@
 
   async function makeTile(item) {
     const card = el('article', 'tile');
+    if (item.prevalence) card.classList.add(item.prevalence);
 
     const head = el('div', 'tile-head');
     const left = el('div');
@@ -320,12 +349,6 @@
         img.decoding = 'async';
         img.className = 'cardimg';
         img.title = name;
-        img.addEventListener('mouseenter', (e) => {
-          previewImg.src = uris.preview || uris.thumb;
-          positionPreview(e);
-          previewPopup.style.display = 'block';
-        });
-        let rafId = null;
         img.addEventListener('mousemove', (e) => {
           if (rafId) return;
           rafId = requestAnimationFrame(() => { positionPreview(e); rafId = null; });
@@ -355,7 +378,7 @@
     grid.innerHTML = '';
     const active = chips.filter(ch => ch.getAttribute('aria-pressed') === 'true').map(ch => ch.dataset.color);
 
-    const items = archetypes
+    const items = themes
       .filter(a => !active.length || includesAllColors(a.colors||{}, active))
       .slice()
       .sort((a,b) => {
@@ -365,7 +388,7 @@
       });
 
     if (!items.length) {
-      const empty = el('div', 'desc', 'No archetypes match your filters.');
+      const empty = el('div', 'desc', 'No themes match your filters.');
       grid.appendChild(empty);
       return;
     }
@@ -401,6 +424,9 @@
     window.print();
   });
 
+  window.addEventListener('scroll', () => { previewPopup.style.display = 'none'; }, { passive: true });
+
+  // Initial render
   render();
   </script>
 </body>
