@@ -127,8 +127,6 @@
           <button class="chip" data-color="B" aria-pressed="false"><img alt="Black" src="https://svgs.scryfall.io/card-symbols/B.svg">B</button>
           <button class="chip" data-color="R" aria-pressed="false"><img alt="Red" src="https://svgs.scryfall.io/card-symbols/R.svg">R</button>
           <button class="chip" data-color="G" aria-pressed="false"><img alt="Green" src="https://svgs.scryfall.io/card-symbols/G.svg">G</button>
-          <button id="compactToggle" class="chip" aria-pressed="false" title="Fit all themes on a single printed page">📄 Fit one page</button>
-          <button id="printBtn" class="chip" title="Print this cheat sheet">🖨️ Print</button>
         </div>
       </div>
     </div>
@@ -247,8 +245,6 @@
 
   const grid = document.getElementById('grid');
   const chips = Array.from(document.querySelectorAll('.chip[data-color]'));
-  const compactToggle = document.getElementById('compactToggle');
-  const printBtn = document.getElementById('printBtn');
   const dynPrint = document.getElementById('dynamicPrint');
   const previewPopup = document.getElementById('previewPopup');
   const previewImg = previewPopup.querySelector('img');
@@ -413,22 +409,12 @@
 
   function setCompact(on) {
     document.body.classList.toggle('compact', on);
-    compactToggle?.setAttribute('aria-pressed', String(on));
     if (on) {
       dynPrint.textContent = `@page { size: A4 landscape; margin: 8mm; }`;
     } else {
       dynPrint.textContent = '';
     }
   }
-
-  compactToggle?.addEventListener('click', () => {
-    const on = compactToggle.getAttribute('aria-pressed') !== 'true';
-    setCompact(on);
-  });
-
-  printBtn?.addEventListener('click', () => {
-    window.print();
-  });
 
   window.addEventListener('scroll', () => { previewPopup.style.display = 'none'; }, { passive: true });
 
