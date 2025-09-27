@@ -36,13 +36,24 @@
       background: rgba(11,13,16,.65);
       border-bottom: 1px solid rgba(255,255,255,.06);
     }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 1rem 1.2rem; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 1rem 1.2rem; width: 100%; }
 
     h1 { font-size: clamp(1.4rem, 2.8vw, 2rem); margin: 0 0 .25rem; letter-spacing: .2px; }
     .sub { color: var(--muted); font-size: .95rem; }
 
+    /* top row: title/sub on left; nothing else */
+    .header-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+
+    /* second row: controls on left, legend/link on right (same line) */
+    .actions-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: .6rem; }
+    .legend-link { font-size: 0.9rem; display: flex; align-items: center; gap: .6rem; margin-left: auto; }
+    .legend-link .legend { display:inline-block;padding:0.2rem 0.5rem;border-radius:6px; }
+    .legend.common { background:var(--common-bg); border:1px solid var(--common-border); }
+    .legend.uncommon { background:var(--uncommon-bg); border:1px solid var(--uncommon-border); }
+    .cubecobra-link { display:inline-block;padding:0.3rem 0.6rem;border-radius:6px;background:var(--accent);color:#000;text-decoration:none;font-weight:600; }
+
     /* Controls */
-    .controls { margin-top: .75rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+    .controls { display: flex; flex-wrap: wrap; gap: .4rem; }
     .chip { border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: .3rem .55rem; cursor: pointer; user-select: none; font-size: .9rem; color: var(--muted); background: rgba(255,255,255,.03); display: inline-flex; align-items: center; gap: .4rem; }
     .chip[aria-pressed="true"] { color: var(--ink); border-color: var(--accent); box-shadow: 0 0 0 2px rgba(124,196,255,.18) inset; }
     .chip img { width: 18px; height: 18px; display: block; }
@@ -110,7 +121,7 @@
       html, body { background: #0b0d10 !important; color: var(--ink) !important; }
       * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       header { position: static; backdrop-filter: none; background: rgba(11,13,16,.85) !important; border-bottom: 1px solid rgba(255,255,255,.15); }
-      .controls { display: none !important; }
+      .actions-row { gap: .5rem; }
       .tile { break-inside: avoid; border-color: rgba(255,255,255,.18); box-shadow: none; }
       .grid { padding: .4rem; }
     }
@@ -119,15 +130,25 @@
 <body>
   <header>
     <div class="wrap">
-      <h1>Regular cube themes</h1>
-      <div class="controls">
-        <div class="filters" id="colorFilters" aria-label="Color filters">
+      <div class="header-top">
+        <div>
+          <h1>Regular cube themes</h1>
+        </div>
+      </div>
+      <div class="actions-row">
+        <div class="controls">
           <button class="chip" data-color="W" aria-pressed="false"><img alt="White" src="https://svgs.scryfall.io/card-symbols/W.svg">White</button>
           <button class="chip" data-color="U" aria-pressed="false"><img alt="Blue" src="https://svgs.scryfall.io/card-symbols/U.svg">Blue</button>
           <button class="chip" data-color="B" aria-pressed="false"><img alt="Black" src="https://svgs.scryfall.io/card-symbols/B.svg">Black</button>
           <button class="chip" data-color="R" aria-pressed="false"><img alt="Red" src="https://svgs.scryfall.io/card-symbols/R.svg">Red</button>
           <button class="chip" data-color="G" aria-pressed="false"><img alt="Green" src="https://svgs.scryfall.io/card-symbols/G.svg">Green</button>
-          </div>
+        </div>
+        <div class="legend-link">
+          <strong>Legend:</strong>
+          <span class="legend common">Common</span>
+          <span class="legend uncommon">Uncommon</span>
+          <a href="https://cubecobra.com/cube/list/a244e0cc-83bd-4030-bc17-f608d76d3112" target="_blank" class="cubecobra-link">CubeCobra ↗</a>
+        </div>
       </div>
     </div>
   </header>
@@ -137,17 +158,6 @@
   </main>
 
   <div class="preview-popup" id="previewPopup"><img alt="preview"></div>
-
-  <footer>
-    <div style="margin-bottom:0.8rem;">
-      <strong>Legend:</strong>
-      <span style="display:inline-block;padding:0.2rem 0.5rem;border-radius:6px;background:var(--common-bg);border:1px solid var(--common-border);margin:0 0.4rem;">Common</span>
-      <span style="display:inline-block;padding:0.2rem 0.5rem;border-radius:6px;background:var(--uncommon-bg);border:1px solid var(--uncommon-border);margin:0 0.4rem;">Uncommon</span>
-    </div>
-    <div style="margin-bottom:0.8rem;">
-      <a href="https://cubecobra.com/cube/list/a244e0cc-83bd-4030-bc17-f608d76d3112" target="_blank" style="display:inline-block;padding:0.4rem 0.8rem;border-radius:8px;background:var(--accent);color:#000;text-decoration:none;font-weight:600;">View full cube on CubeCobra ↗</a>
-    </div>
-  </footer>
 
   <style id="dynamicPrint" media="print"></style>
 
@@ -261,9 +271,7 @@
 
   function el(tag, cls, txt) { const e = document.createElement(tag); if (cls) e.className = cls; if (txt) e.textContent = txt; return e; }
 
-  function manaIconUrl(letter) {
-    return `https://svgs.scryfall.io/card-symbols/${letter}.svg`;
-  }
+  function manaIconUrl(letter) { return `https://svgs.scryfall.io/card-symbols/${letter}.svg`; }
 
   function createManaPip(letter, small=false) {
     const wrap = el('div', small ? 'pip small' : 'pip');
@@ -294,28 +302,15 @@
   }
 
   function positionPreview(e) {
-    const pad = 16;
-    const margin = 8;
-    // Use viewport-relative coords for position:fixed
-    let left = e.clientX + pad;
-    let top  = e.clientY + pad;
-
-    // Temporarily show to measure size accurately
+    const pad = 16; const margin = 8;
+    let left = e.clientX + pad; let top  = e.clientY + pad;
     previewPopup.style.display = 'block';
     const rect = previewPopup.getBoundingClientRect();
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-
-    if (left + rect.width + margin > vw) {
-      left = e.clientX - rect.width - pad;
-    }
+    const vw = window.innerWidth; const vh = window.innerHeight;
+    if (left + rect.width + margin > vw) left = e.clientX - rect.width - pad;
     if (left < margin) left = Math.max(margin, vw - rect.width - margin);
-
-    if (top + rect.height + margin > vh) {
-      top = e.clientY - rect.height - pad;
-    }
+    if (top + rect.height + margin > vh) top = e.clientY - rect.height - pad;
     if (top < margin) top = Math.max(margin, vh - rect.height - margin);
-
     previewPopup.style.left = left + 'px';
     previewPopup.style.top  = top + 'px';
   }
@@ -345,34 +340,19 @@
 
     const samples = el('div', 'samples');
     const names = (item.samples || []).slice(0,3);
+
     await Promise.all(names.map(async (name) => {
       const uris = await fetchCardUris(name);
       if (uris.thumb) {
         const img = document.createElement('img');
-        img.src = uris.thumb;
-        img.alt = name;
-        img.loading = 'lazy';
-        img.decoding = 'async';
-        img.className = 'cardimg';
-        img.title = name;
-        img.addEventListener('mouseenter', (e) => {
-          previewImg.src = uris.preview || uris.thumb;
-          positionPreview(e);
-          previewPopup.style.display = 'block';
-        });
-        let rafId = null;
-        img.addEventListener('mousemove', (e) => {
-          if (rafId) return;
-          rafId = requestAnimationFrame(() => { positionPreview(e); rafId = null; });
-        });
-        img.addEventListener('mouseleave', () => {
-          previewPopup.style.display = 'none';
-          previewImg.src = '';
-        });
+        img.src = uris.thumb; img.alt = name; img.loading = 'lazy'; img.decoding = 'async';
+        img.className = 'cardimg'; img.title = name; let rafId = null;
+        img.addEventListener('mouseenter', (e) => { previewImg.src = uris.preview || uris.thumb; positionPreview(e); previewPopup.style.display = 'block'; });
+        img.addEventListener('mousemove', (e) => { if (rafId) return; rafId = requestAnimationFrame(() => { positionPreview(e); rafId = null; }); });
+        img.addEventListener('mouseleave', () => { previewPopup.style.display = 'none'; previewImg.src = ''; });
         samples.appendChild(img);
       } else {
-        const ph = el('div', 'cardimg placeholder', name);
-        samples.appendChild(ph);
+        const ph = el('div', 'cardimg placeholder', name); samples.appendChild(ph);
       }
     }));
 
@@ -399,16 +379,9 @@
         return pb-pa || a.name.localeCompare(b.name);
       });
 
-    if (!items.length) {
-      const empty = el('div', 'desc', 'No themes match your filters.');
-      grid.appendChild(empty);
-      return;
-    }
+    if (!items.length) { grid.appendChild(el('div', 'desc', 'No themes match your filters.')); return; }
 
-    for (const it of items) {
-      const tile = await makeTile(it);
-      grid.appendChild(tile);
-    }
+    for (const it of items) { const tile = await makeTile(it); grid.appendChild(tile); }
   }
 
   chips.forEach(ch => ch.addEventListener('click', () => {
@@ -419,16 +392,12 @@
 
   function setCompact(on) {
     document.body.classList.toggle('compact', on);
-    if (on) {
-      dynPrint.textContent = `@page { size: A4 landscape; margin: 8mm; }`;
-    } else {
-      dynPrint.textContent = '';
-    }
+    compactToggle?.setAttribute('aria-pressed', String(on));
+    dynPrint.textContent = on ? `@page { size: A4 landscape; margin: 8mm; }` : '';
   }
 
   window.addEventListener('scroll', () => { previewPopup.style.display = 'none'; }, { passive: true });
 
-  // Initial render
   render();
   </script>
 </body>
